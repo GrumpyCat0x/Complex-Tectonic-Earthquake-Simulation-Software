@@ -20,48 +20,49 @@ class MainWidget(QWidget):
         self.__InitView()
     
     def __InitData(self):
-        ''' 初始化成员变量 '''
+        ''' Initialize member variables '''
         self.__paintBoard = PaintBoard(self)
-        #获取颜色列表(字符串类型)
+        # Get color list (string type)
         self.__colorList = QColor.colorNames() 
         
     def __InitView(self):
-        ''' 初始化界面 '''
+        ''' Initialize UI '''
         self.setFixedSize(650, 475)
         self.setWindowTitle("PaintBoard Example PyQt5")
         
-        #新建一个水平布局做为本窗体的主布局
+        # Create horizontal layout for main window
         main_layout = QHBoxLayout(self) 
-        #设置主布局内边距以及控件间距为10px
+        # Set layout margins and spacing to 10px
         main_layout.setSpacing(10) 
     
-        #在主界面左侧放置画板
+        # Place canvas on the left side
         main_layout.addWidget(self.__paintBoard) 
         
-        #新建垂直子布局用于放置按键
+        # Create vertical sub-layout for buttons
         sub_layout = QVBoxLayout() 
         
-        #设置此子布局和内部控件的间距为10px
+        # Set sub-layout margins and spacing to 10px
         sub_layout.setContentsMargins(10, 10, 10, 10) 
 
-        self.__btn_Clear = QPushButton("清空画板")
-        self.__btn_Clear.setParent(self) #设置父对象为本界面
+        self.__btn_Clear = QPushButton("Clear Canvas")
+        self.__btn_Clear.setParent(self) # Set parent widget
        
-    #将按键按下信号与画板清空函数相关联
+        # Connect button signal to clear function
         self.__btn_Clear.clicked.connect(self.__paintBoard.Clear) 
         sub_layout.addWidget(self.__btn_Clear)
         
-     #   self.__btn_Quit = QPushButton("退出")
-     #   self.__btn_Quit.setParent(self) #设置父对象为本界面
-      #  self.__btn_Quit.clicked.connect(self.Quit)
-      #  sub_layout.addWidget(self.__btn_Quit)
+        # Quit button (commented out)
+        # self.__btn_Quit = QPushButton("Quit")
+        # self.__btn_Quit.setParent(self) # Set parent widget
+        # self.__btn_Quit.clicked.connect(self.Quit)
+        # sub_layout.addWidget(self.__btn_Quit)
         
-        self.__btn_Save = QPushButton("保存图片")
+        self.__btn_Save = QPushButton("Save Image")
         self.__btn_Save.setParent(self)
         self.__btn_Save.clicked.connect(self.on_btn_Save_Clicked)
         sub_layout.addWidget(self.__btn_Save)
         
-        self.__cbtn_Eraser = QCheckBox(" 使用橡皮擦")
+        self.__cbtn_Eraser = QCheckBox(" Use Eraser")
         self.__cbtn_Eraser.setParent(self)
         self.__cbtn_Eraser.clicked.connect(self.on_cbtn_Eraser_clicked)
         sub_layout.addWidget(self.__cbtn_Eraser)
@@ -70,7 +71,7 @@ class MainWidget(QWidget):
         sub_layout.addWidget(splitter)
         
         self.__label_penThickness = QLabel(self)
-        self.__label_penThickness.setText("画笔粗细")
+        self.__label_penThickness.setText("Brush Thickness")
         self.__label_penThickness.setFixedHeight(20)
         sub_layout.addWidget(self.__label_penThickness)
         
@@ -131,9 +132,9 @@ class MainWidget(QWidget):
         
     def on_cbtn_Eraser_clicked(self):
         if self.__cbtn_Eraser.isChecked():
-            self.__paintBoard.EraserMode = True #进入橡皮擦模式
+            self.__paintBoard.EraserMode = True # Enter eraser mode
         else:
-            self.__paintBoard.EraserMode = False #退出橡皮擦模式
+            self.__paintBoard.EraserMode = False # Exit eraser mode
         
         
     #def Quit(self):

@@ -1,0 +1,6 @@
+PyQt5==5.15.9
+matplotlib==3.7.1
+opencv-python==4.8.0.74
+numpy==1.24.3
+scipy==1.11.1
+qdarkstyle==3.2.3

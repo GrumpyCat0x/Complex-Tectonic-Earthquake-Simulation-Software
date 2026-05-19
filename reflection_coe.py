@@ -7,10 +7,10 @@ import os.path
 class reflection_coe(QMainWindow):
     def __init__(self):
         super(reflection_coe, self).__init__()
-        self.setWindowTitle("设置反射系数")
+        self.setWindowTitle("Set Reflection Coefficient")
         self.file_name = "__data.png"
         if os.path.isfile(self.file_name) == False:
-            QMessageBox.warning(self, "警告", "请先绘制图像！", QMessageBox.Yes | QMessageBox.Discard)
+            QMessageBox.warning(self, "Warning", "Please draw an image first!", QMessageBox.Yes | QMessageBox.Discard)
             return
         self.setupUi(self)
         self.retranslateUi(self)
@@ -49,16 +49,16 @@ class reflection_coe(QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(Form)
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label_5.setText(_translate("Form", "请输入{}个地层(自上而下)的反射系数（用空格隔开）".format(self.num-1)))
-        self.pushButton.setText(_translate("Form", "确定"))
+        Form.setWindowTitle(_translate("Form", "Set Reflection Coefficient"))
+        self.label_5.setText(_translate("Form", "Enter {} reflection coefficients (separated by space):".format(self.num-1)))
+        self.pushButton.setText(_translate("Form", "OK"))
     def process(self):
         xishu = self.lineEdit.text()
         self.xishu = re.findall(r'-?\d+\.?\d*e?-?\d*?',xishu)
         for i in list(self.xishu):
             i = float(i)
             if i <= float(-1) or i >= float(1):
-                QMessageBox.warning(self, " ", "反射系数错误，范围是-1到1之间", QMessageBox.Yes | QMessageBox.Discard)
+                QMessageBox.warning(self, " ", "Reflection coefficient error, range should be -1 to 1", QMessageBox.Yes | QMessageBox.Discard)
                 return
         if len(self.xishu) == int(self.num-1):
             fjson = 'project.json'
@@ -68,9 +68,9 @@ class reflection_coe(QMainWindow):
             content.update(axis)
             with open(fjson, 'w') as f_new:
                 json.dump(content, f_new)
-            QMessageBox.warning(self, " ", "反射系数保存成功",  QMessageBox.Yes| QMessageBox.Discard)
+            QMessageBox.warning(self, " ", "Reflection coefficient saved successfully",  QMessageBox.Yes| QMessageBox.Discard)
         else:
-            QMessageBox.warning(self, " ", "地层条数与反射系数个数不一致，请重新输入反射系数", QMessageBox.Yes | QMessageBox.Discard)
+            QMessageBox.warning(self, " ", "Number of layers does not match number of coefficients, please enter again", QMessageBox.Yes | QMessageBox.Discard)
 
 
 

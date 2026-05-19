@@ -7,16 +7,16 @@ from PyQt5.QtWidgets import *
 
 class opencv(QDialog):
     def __init__(self,type):
-        # 初始化一个img的ndarray, 用于存储图像
+        # Initialize ndarray for image storage
         self.img = np.ndarray(())
         super().__init__()
         self.type = type
         self.initUI(type)
     def initUI(self,type):
-        # 设置窗口图标
+        # Set window icon
         # self.setWindowIcon(QIcon("filename"))
-        # 设置窗口名
-        self.setWindowTitle("{}边缘检测结果".format(type))
+        # Set window title
+        self.setWindowTitle("{} Edge Detection".format(type))
         self.resize(400, 300)
         self.btnOpen = QPushButton('Open', self)
         self.btnSave = QPushButton('Save', self)
@@ -41,7 +41,7 @@ class opencv(QDialog):
         fileName, tmp = QFileDialog.getOpenFileName(
             self, 'Open Image', './__data', '*.png *.jpg *.bmp')
 
-        if fileName is '':
+        if fileName == '':
             return
         # 采用opencv函数读取数据
         self.img = cv.imread(fileName, -1)
@@ -52,13 +52,13 @@ class opencv(QDialog):
         if self.img.size == 1:
             QMessageBox.warning(self, "警告", "请先选择图片！", QMessageBox.Yes | QMessageBox.No)
             return
-        # 调用存储文件dialog
+        # Save file dialog
         fileName = '__data.png'
         '''
         fileName, tmp = QFileDialog.getSaveFileName(
             self, 'Save Image', './__data', '*.png *.jpg *.bmp', '*.png')
         '''
-        if fileName is '':
+        if fileName == '':
             return
 
         # 调用opencv写入图像
@@ -66,18 +66,18 @@ class opencv(QDialog):
         QMessageBox.warning(self, " ", "识别后的图像保存成功", QMessageBox.Yes | QMessageBox.Discard)
     def processSlot(self):
         if self.img.size == 1:
-            QMessageBox.warning(self, "警告", "请先选择图片！", QMessageBox.Yes | QMessageBox.No)
+            QMessageBox.warning(self, "Warning", "Please select an image first!", QMessageBox.Yes | QMessageBox.No)
             return
         maping = {
-            'Scharr算子':self.Scharr(),
-            'sobel算子':self.Sobel(),
-            'log算子':self.Log(),
-            'canny算子': self.Canny(),
+            'Scharr Operator':self.Scharr(),
+            'Sobel Operator':self.Sobel(),
+            'Laplacian Operator':self.Log(),
+            'Canny Edge Detection': self.Canny(),
         }
         self.img = maping.get(self.type)
         self.refreshShow()
     def refreshShow(self):
-        # 提取图像的尺寸和通道, 用于将opencv下的image转换成Qimage
+        # Extract image dimensions and channels for conversion from OpenCV to QImage
         height, width, channel = self.img.shape
         bytesPerLine = 3 * width
         self.qImg = QImage(self.img.data, width, height, bytesPerLine,
@@ -92,8 +92,8 @@ class opencv(QDialog):
         dst_sobel = cv2.addWeighted(absX, 0.5, absY, 0.5, 0)
         return dst_sobel
     def Scharr(self):
-        x = cv2.Scharr(self.img, cv2.CV_16S, 1, 0)  # X 方向
-        y = cv2.Scharr(self.img, cv2.CV_16S, 0, 1)  # Y 方向
+        x = cv2.Scharr(self.img, cv2.CV_16S, 1, 0)  # X direction
+        y = cv2.Scharr(self.img, cv2.CV_16S, 0, 1)  # Y direction
         absX = cv2.convertScaleAbs(x)
         absY = cv2.convertScaleAbs(y)
         dst_scharr = cv2.addWeighted(absX, 0.5, absY, 0.5, 0)

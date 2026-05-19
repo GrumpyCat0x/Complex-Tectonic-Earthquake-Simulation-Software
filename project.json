@@ -1,1 +1,1 @@
-{"project_name": "", "Grid_range": "[0, 0, 0, 0]", "Cell_range": "[0, 0]", "sampling_rate": "0.001", "Dominant_frequency": "35", "sampling_time": "0.032", "xishu": ["0.5", "0.6", "0.6", "0.4"]}
+{"project_name": "Demo_Project", "Grid_range": "[0, 500, 0, 1000]", "Cell_range": "[10, 5]", "sampling_rate": "0.001", "Dominant_frequency": "35", "sampling_time": "0.032", "xishu": ["0.5", "0.6", "0.6", "0.4"]}

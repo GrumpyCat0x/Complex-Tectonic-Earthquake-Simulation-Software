@@ -137,18 +137,18 @@ class new_project(QMainWindow):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.groupBox_2.setTitle(_translate("Form", "单元格尺寸"))
-        self.label_9.setText(_translate("Form", "宽度（米）"))
-        self.label_10.setText(_translate("Form", "高度（米）"))
-        self.pushButton.setText(_translate("Form", "保存项目"))
-        self.pushButton_2.setText(_translate("Form", "取消"))
-        self.groupBox.setTitle(_translate("Form", "网格范围"))
-        self.label_7.setText(_translate("Form", "底（米）"))
-        self.label_8.setText(_translate("Form", "顶（米）"))
-        self.label_5.setText(_translate("Form", "左（米）"))
-        self.label_6.setText(_translate("Form", "右（米）"))
-        self.label.setText(_translate("Form", "项目名称："))
+        Form.setWindowTitle(_translate("Form", "New Forward Modeling Project"))
+        self.groupBox_2.setTitle(_translate("Form", "Cell Size"))
+        self.label_9.setText(_translate("Form", "Width (m)"))
+        self.label_10.setText(_translate("Form", "Height (m)"))
+        self.pushButton.setText(_translate("Form", "Save Project"))
+        self.pushButton_2.setText(_translate("Form", "Cancel"))
+        self.groupBox.setTitle(_translate("Form", "Grid Range"))
+        self.label_7.setText(_translate("Form", "Bottom (m)"))
+        self.label_8.setText(_translate("Form", "Top (m)"))
+        self.label_5.setText(_translate("Form", "Left (m)"))
+        self.label_6.setText(_translate("Form", "Right (m)"))
+        self.label.setText(_translate("Form", "Project Name:"))
     def save(self):
         self.name = self.lineEdit.text()
         self.Grid_range = [self.spinBox_4.value(), self.spinBox_3.value(), self.spinBox.value(), self.spinBox_2.value()]
@@ -158,4 +158,4 @@ class new_project(QMainWindow):
         f2 = open('project.json', 'w')
         f2.write(b)
         f2.close()
-        QMessageBox.warning(self, " ", "保存成功！", QMessageBox.Yes | QMessageBox.No)
+        QMessageBox.warning(self, " ", "Save successful!", QMessageBox.Yes | QMessageBox.No)

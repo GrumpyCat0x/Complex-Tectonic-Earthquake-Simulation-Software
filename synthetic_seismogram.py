@@ -110,7 +110,7 @@ class synthetic_seismogram(QMainWindow):
             return res_list
         shit = self.shit
         fig, ax = plt.subplots()
-        fig.canvas.set_window_title("合成地震记录")
+        fig.suptitle("Synthetic Seismogram")
         [nz, nx] = list(np.array(shit).shape)
         trmx = get_max_value(shit)
         scal = 1
